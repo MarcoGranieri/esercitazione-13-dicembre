@@ -9,21 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeatherComponent implements OnInit {
 
-  weather!: Weather[];
-  city = 'Napoli';
+  weather!: Weather;
+  city!: string;
+  date = new Date;
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
-    this.weatherService.getWeather(this.city).subscribe(
-      res => console.log(res)
-    );
+    // this.weatherService.getWeather().subscribe(
+    //   res => console.log(res)
+    // );
   }
 
-  // getWeather(city: string) {
-  //   return this.weatherService.getWeather(city).subscribe(
-  //     res => console.log(res)
-  //   );
-  // }
+  getWeather(city: string) {
+    return this.weatherService.getWeather(city).subscribe(
+      res => this.weather = res
+    );
+  }
 
 }

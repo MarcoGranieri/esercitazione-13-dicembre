@@ -11,15 +11,19 @@ import { map } from 'rxjs/operators';
 
 export class WeatherService {
 
-  cityName!: string;
-  apiKey = 'b32c09e25b373fea02b91733c2cea846';
-
   constructor(
     private http: HttpClient
   ) { }
 
-  getWeather(city: string) : Observable<Weather[]> {
-    const params = new HttpParams().set('units', 'metric').set('lang', 'it').set('q', `${this.cityName}`).set('appid', `${this.apiKey}`)
-    return this.http.get<IWeather[]>(environment.apiUrl, {params})
+  getWeather(city : string) : Observable<Weather> {
+    const params = new HttpParams()
+      .set('appId', '28e7bf225be35501d2817f95012ef7c5')
+      .set('q', city)
+      .set('lang', 'it')
+      .set('units', 'metric')
+    return this.http.get<IWeather>(environment.apiUrl, {params})
+    .pipe(
+      map(response => Weather.Build(response))
+    )
   }
 }

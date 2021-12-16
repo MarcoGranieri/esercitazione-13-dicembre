@@ -1,3 +1,12 @@
 <h1>Weather</h1>
 
-<input type="text">
+<span>City</span>
+<input type="text" [(ngModel)]='city'>
+<button (click)="getWeather(city)">Search</button>
+
+<div *ngIf="weather">
+    <span>{{weather.name}} {{weather.sys.country}} {{date | date: 'd MMMM y'}}
+      {{weather.main.temp| number: '1.0-0'}} °C {{weather.weather[0].description}}
+      <img width="40px " src='https://openweathermap.org/img/wn/{{weather.weather[0].icon}}@2x.png'>
+    </span>
+</div>
