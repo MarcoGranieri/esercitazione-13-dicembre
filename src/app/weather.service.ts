@@ -21,7 +21,7 @@ export class WeatherService {
       .set('q', city)
       .set('lang', 'it')
       .set('units', 'metric')
-    return this.http.get<IWeather>(environment.apiUrl, {params})
+    return this.http.get<IWeather>('http://api.openweathermap.org/data/2.5/weather', {params})
     .pipe(
       map(response => Weather.Build(response))
     )
